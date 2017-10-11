@@ -1,6 +1,7 @@
 package com.wansan.test;
 /*
- * yield就是将线程的运行状态转变成可运行状态,就是暂停当前运行的线程,让其等待。
+ * yield就是将线程的运行状态转变成可运行状态,
+ * 就是暂停当前运行的线程,让其等待。
  */
 public class yieldTest01 extends Thread{
  private String name;

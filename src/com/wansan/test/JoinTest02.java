@@ -27,13 +27,13 @@ public class JoinTest02 extends Thread{
 	joinTest02.start();
 	joinTest03.start();
 	try {
-		joinTest02.join();
+		joinTest03.join();
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
 	}
 	try {
-		joinTest03.join();
+		joinTest02.join();
 	} catch (InterruptedException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

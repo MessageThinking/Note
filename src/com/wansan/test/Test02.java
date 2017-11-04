@@ -20,7 +20,7 @@ package com.wansan.test;
 	 String b="sss";
 	 double c=21;
 	 public Test02() {
-		 System.out.println("sdsad");
+		 System.out.println("111sdsad");
 	 }
 	public void add(String s) {
 		System.out.print("add");

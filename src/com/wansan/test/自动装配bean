@@ -1,0 +1,14 @@
+Autowired:自动装配字符。可以装配属性,构造函数,方法。
+component:组件标识符,可以告诉框架可以直接对那个bean进行装配。
+componentScan:组件扫描标识符,可以直接扫描出需要装配的package包。
+Configuration:等价于xml中的<bean>
+Bean:bean注解会告诉spring讲返回一个对象
+javaConfig装载bean：就是说我写一个java文件,就是说我在里面写一个可以
+加载的bean,可以在里面设置属性值什么的都可以。每个方法都可以创建一个bean.
+含义类似xml格式中配置
+<bean name="",class="">
+<property name="",value="">
+</bean>
+Qualifier:当在Controller层需要调用到service时,service里面有多个类继承接口时
+需要接口时,这个时候需要区别那个service去调用,这个时候使用@Qualifier注释去规范
+到底调用哪一个service.

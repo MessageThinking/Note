@@ -1,0 +1,71 @@
+视图:类似表.如果你要查询这个视图的话必须对应表里面有数据，不然
+用select * from 视图会报错。
+视图只能查询和修改不能进行存储。但是除了不能存储之外其他性能和真实表
+一样。
+约束：约束确保属性满足商业特性。约束：not null,primary key,forgein key
+unique,check
+primary key :一张表只能会有一个主键,不能为空也不能重复。但是可以多个unique。
+forgin key :求外键列数据必须在主表的主键列存在或是为NULL,所以外键约束必须在从表
+上。
+default:例子:CREATE TABLE Persons
+(
+P_Id int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Address varchar(255),
+City varchar(255) DEFAULT 'Sandnes'
+)
+check：用于强制数据必须满足条件。例子:CREATE TABLE Persons
+(
+P_Id int NOT NULL,
+LastName varchar(255) NOT NULL,
+FirstName varchar(255),
+Address varchar(255),
+City varchar(255),
+CHECK (P_Id>0)
+)
+添加约束：modify add 
+删除约束：drop
+子查询：就是像这样的语句：select xx1,xx2,xx3 from 表名 where 关系语句(select xxx1,xxx2,xxx3 from)
+oracle的伪列：只能查询不能存储.rowId：返回物理地址.rownum:返回序列.
+游标：一个sql私有的区域暂时存放,一个暂时存放sql语句不影响的数据,存在一个虚表中。
+oracle数据库具有回滚功能,所以在游标的区域内的数据都可以回滚,对数据库安全得以确保。
+索引：索引是为了方便查询数据库中的数据产生的。它对数据库中的表没有实际的影响,数据量比较大的时候使用。
+oracle的存储过程：对于函数来说,函数是有返回值的,但是对于存储过程来说,存储过程可能没有返回值,函数是存储过程
+CREATE INDEX ：语句用于在表中创建索引。
+在不读取整个表的情况下，索引使数据库应用程序可以更快地查找数据。
+的一种方式。
+例子：CREATE UNIQUE INDEX index_name
+ON table_name (column_name)唯一索引
+CREATE  INDEX index_name 普通索引
+ON table_name (column_name)
+数据库的优化：1.尽量分表进行,分多个表进行。2.建立合适的索引
+3.确定好需要选择的有效的表。
+分页：SELECT * FROM  
+(  
+SELECT A.*, ROWNUM RN  
+FROM (SELECT * FROM TABLE_NAME) A  
+WHERE ROWNUM <= 40  
+)  
+WHERE RN >= 21 
+select *这个*是每个列的集合,就是说这个包含了所有的列.一般我们在优化sql的时候应该尽量选择具体的列然后进行选择.
+oracle左连接和右连接：
+触发器:就是说在当一个表中一件事情发生的时候,然后会引起另一个表中的事件发生.语法：create trigger 触发器名称(你自己命名的) on 表 for 用途(delete|update|insert) 
+as 
+delete|update|insert语句 
+default null:默认为空 default:默认值
+ENGINE=MyISAM 是选择存储引擎
+DEFAULT CHARSET=gbk 默认字符集
+AUTO_INCREMENT=2 是设定该字段为自增字段，每次增加2
+ REFERENCES：
+ COMMENT：用来添加注释
+ constraint 是表示 它是个约束; primary key 表示是个主键约束 
+ 所以 constraint pk_course primary key (cno,tno) 表示 course表
+ 上存在一个名字叫“pk_course”的主键约束 ，
+ 它的主键列是 cno,tno的组合列 下面那个同理 表示 SC表上存在一
+ Inner join：两表之间的共有的数据展现在一张表中
+ Full Outer Join：两个表中所有的数据在一张表中展现
+ Left outer join：展现的是一张主表的信息,还有是一张从表中和主表中匹配的信息
+ Right outer join(右连接)
+ 
+ 

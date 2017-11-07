@@ -67,5 +67,7 @@ AUTO_INCREMENT=2 是设定该字段为自增字段，每次增加2
  Full Outer Join：两个表中所有的数据在一张表中展现
  Left outer join：展现的是一张主表的信息,还有是一张从表中和主表中匹配的信息
  Right outer join(右连接)
- 
+ oracle分页：select * from (select A* ,rownum row_num from(
+ select * from student )A where rownum<41
+ ) where row_num>10
  

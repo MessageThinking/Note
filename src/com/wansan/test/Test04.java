@@ -13,6 +13,21 @@ package com.wansan.test;
  * 反过来是可以的.而且可以在没有创建任何对象的前提下,仅仅通过类本身来调用static方法.
  * 这实际上正是static方法的主要用途
  * final:final类不能继承,final方法不能被被重写(真爽,只是点少了好多)
+ * 继承：子类继承父类当运行new子类的时候,首先需要调用父类的构造方法,然后再调用子类的构造方法。
+ * 当子类向上转型的时候可以直接调用可以直接调用父类的方法和属性,但是会失去子类的方法和属性。
+ * 当子类重写了父类的方法时,向上转型调用的是子类重写后方法.向下转型可能会发生错误, Girl g1=new MMGirl(); //向上转型
+Girl是父类 MMGirk是子类
+                   g1.smile();
+
+                   MMGirl mmg=(MMGirl)g1;    //向下转型,编译和运行皆不会出错
+
+                   mmg.smile();
+
+                   mmg.c();
+
+                   Girl g2=new Girl();
+
+           //MMGirl mmg1=(MMGirl)g2; //不安全的向下转型,编译无错但会运行会出错
  */
 public class Test04 extends Test02{
 	//这样写会直接打印出这个对象出来

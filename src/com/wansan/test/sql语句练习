@@ -1,0 +1,41 @@
+
+/*INSERT into student VALUES(4003,'cc','女',21,'yy')
+
+DELETE from student where student.Sname='cc'
+drop可以删除整个表和视图(不能够回滚)
+delet只能删除其中的数据
+TRUNCATE 只能删除其中的表（不能够回滚）
+DROP  TABLE student
+
+SELECT * from student
+create TABLE student(
+Sno INT NOT NULL,
+Sname VARCHAR(225) not NULL,
+Ssex VARCHAR(225) NOT NULL,
+Sage int not NULL,
+sdept VARCHAR(225) NOT NULL,
+PRIMARY KEY (`Sno`)
+)
+INSERT into student VALUES(4001,'cc','女',21,'yy'),(4002,'aa','女',21,'sx'),(4003,'dd','女',21,'dl')
+update student SET Ssex='男' where Sno=4001
+
+INSERT into student VALUES(4004,'ccd','男',21,'dyu'),(4005,'ee','男',21,'rr'),(4006,'ww','女',21,'dl')
+
+alter TABLE student  ADD setbirthday Datetime
+DELETE from student WHERE student.Sdept='yy' and student.Ssex='男'
+多表删除语句：通过查询一个表的信息然后删除另一个表中的其中一行记录
+DELETE FROM sc WHERE Cno in(select Cno from course WHERE Cname='yy' )
+update student SET student.Sdept='yy' WHERE student.Sno=4002
+update student set student.Sage=22, student.Ssex='男' where student.Sname='aa'
+升序
+select * from student where student.Sage<=21 and student.Sage>=19 ORDER BY student.Sage DESC
+select * from student where student.Sname LIKE '%_a'
+select Sno,Cno FROM sc where sc.Grade=NULL and sc.Cno='2'
+GROUP BY 结果按照组首字母排序
+select * from student WHERE student.Sdept in('yy','sx','rr') GROUP BY student.Sdept
+select sc.Cno,sc.Sno,sc.Grade/10+1  as LEVEL from sc  
+DISTINCT去除重复
+SELECT DISTINCT course.Cno from course
+*/
+select sc.Grade from sc where sc.Sno='' and (sc.Cno='' or 
+sc.Cno='')

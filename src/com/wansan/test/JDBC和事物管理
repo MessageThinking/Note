@@ -1,0 +1,52 @@
+1.连接池：当程序开始的时候,连接池中会出现一些已经创建好的连接
+则当需要调用的时候直接可以拿过来用不需要临时创建了,这样节省了
+时间,当程序结束了则关闭连接,释放其中的资源.
+连接池的工作原理主要由三部分组成，分别为连接池的建立、连接池中连接的使用管理、连接池的关闭。
+第一、连接池的建立。一般在系统初始化时，连接池会根据系统配置建立，并在池中创建了几个连接对象，以便使用时能从连接池中获取。连接池中的连接不能随意创建和关闭，这样避免了连接随意建立和关闭造成的系统开销。Java中提供了很多容器类可以方便的构建连接池，例如Vector、Stack等。
+第二、连接池的管理。连接池管理策略是连接池机制的核心，连接池内连接的分配和释放对系统的性能有很大的影响。其管理策略是：
+当客户请求数据库连接时，首先查看连接池中是否有空闲连接，如果存在空闲连接，则将连接分配给客户使用；如果没有空闲连接，则查看当前所开的连接数是否已经达到最大连接数，如果没达到就重新创建一个连接给请求的客户；如果达到就按设定的最大等待时间进行等待，如果超出最大等待时间，则抛出异常给客户。 当客户释放数据库连接时，先判断该连接的引用次数是否超过了规定值，如果超过就从连接池中删除该连接，否则保留为其他客户服务。
+该策略保证了数据库连接的有效复用，避免频繁的建立、释放连接所带来的系统资源开销。
+第三、连接池的关闭。当应用程序退出时，关闭连接池中所有的连接，释放连接池相关的资源，该过程正好与创建相反。
+2.事务：事物是一系列的业务操作,只是这些操作要么全部成功要不全部失败.它有这些特性：
+1 、原子性 
+事务是数据库的逻辑工作单位，事务中包含的各操作要么都做，要么都不做 
+2 、一致性 
+事 务执行的结果必须是使数据库从一个一致性状态变到另一个一致性状态。因此当数据库只包含成功事务提交的结果时，就说数据库处于一致性状态。如果数据库系统 运行中发生故障，有些事务尚未完成就被迫中断，这些未完成事务对数据库所做的修改有一部分已写入物理数据库，这时数据库就处于一种不正确的状态，或者说是 不一致的状态。 
+3 、隔离性 
+一个事务的执行不能其它事务干扰。即一个事务内部的操作及使用的数据对其它并发事务是隔离的，并发执行的各个事务之间不能互相干扰。 
+4 、持续性 
+也称永久性，指一个事务一旦提交，它对数据库中的数据的改变就应该是永久性的。接下来的其它操作或故障不应该对其执行结果有任何影响。
+JDBC:1.注册驱动.Class.forName(“com.MySQL.jdbc.Driver”);
+     2.创建链接.Connection conn=DriverMangement.getConnetion(url,username,password)
+     3.创建执行sql语句statement PrepareStatment ps=conn.preparestatement(sql);
+     4.处理结果集  ResultSet rs=ps.ExcuteQuery();
+     5.关闭资源 把流关闭了
+spring是如何管理事务的：spring管理事务有两种方式：编程式,声明式
+不管是哪一种方式都需要配置文件中配置事务管理bean(transcationManagement).
+编程式：首先配置事务管理bean,然后再配置一个事务管理模板：transcationTemplet(需要在配置bean中把transcationManagement引入)
+在代码中需要注入这个模板就直接配置在service层的bean中,最后在实现方法中调用execute()方法
+声明式：原始的：首先配置事务管理器.然后配置一下transcationproxyFactorybean进行对service中方法进行增强,这个bean里面的属性设置一下target
+就是我们的service层.其实这种方式是通过一个代理bean来实现的.具体事例就是：
+<bean id="serviceImpProxy" class="代理类">
+<property name="target" ref="service">
+<property name="trascationManager" ref="trascationManager">
+注入属性
+<property name="属性" >
+<pro key="tranf">隔离级别,事务传播类型,readonly</property>
+</bean>
+最终还需要在代码中注入@Resources(增强service的代理)
+xml:首先还是配置事务管理器,然后配置通知
+<tx:advice id="txadvice">
+<tx:attributes>
+<tx:attributes>
+<tx:method="transfer" >属性配置
+</tx:attributes>
+然后配置切面：
+<aop:config>
+配置切点：
+<aop:pointcut expression=execute"具体的service" id="pointcut1"/>
+配置切面：
+<aop:advisor advice-ref="txadvice" pointcut-ref="pointcut1">
+</aop:config>
+最后在代码中配置@Resouce(service...)
+注解式：配置事务管理器,然后开启事务直接,最后在业务层添加@Transcational(这个里面可以添加一些属性)

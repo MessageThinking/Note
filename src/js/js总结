@@ -1,0 +1,9 @@
+$.ajax({
+        url:"这里写form表单的action",
+        dataType:"json",    //返回的数据类型 json html 等
+        type:"post", //请求方式 post get
+        data:$("#这里写form的ID").serialize(), //传递form的表单参数
+        success:function(data){
+            //处理返回的数据
+        }
+    });

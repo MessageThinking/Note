@@ -38,7 +38,6 @@ spring是如何管理事务的：spring管理事务有两种方式：编程式,声明式
 xml:首先还是配置事务管理器,然后配置通知
 <tx:advice id="txadvice">
 <tx:attributes>
-<tx:attributes>
 <tx:method="transfer" >属性配置
 </tx:attributes>
 然后配置切面：

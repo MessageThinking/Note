@@ -23,8 +23,24 @@ import java.util.LinkedList;
 * stringbuffer线程安全,StringBuilder线程不安全的.
 * HashTable和HashMap:HashTable是线程安全的,HashMap是线程不安全的.
 * HashTable不允许空键值,hashMap允许空键值.
-* 
-* 
+* 集合的遍历的三种方式：(以list为例)1.将集合变成数组如：Object[] a=list.toArray();
+* 2.将集合用for循环和get()的方法遍历出来。3.将ListIterator a=list.ListIterator ();
+* for(a.hasNext){
+* system.out.print(a.next())遍历
+* } 
+* Map遍历：1.Set set=Map.keySet();
+* for(Integer in:set){
+* system.out.print(map.getKey(in));
+* }
+* 2.Interator in=Map.EntrySet.interator();
+* for(in.hasNext){
+* Map.Entry ins=in.interator().next();
+* system.out.print(ins.getKey()+ins.getvalue());
+* }
+* 3.for(Map.Entry entry:map.entrySet()){
+* system.out.print(entry.getKey+entry.getValue());
+* }
+* set集合遍历和list差不多
 */
 public class ArrayListTest {
 public static void main(String[] args) {
